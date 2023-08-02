@@ -1,0 +1,18 @@
+{
+    "hiresPhoto": {        
+        "maxWidthPort": 1280,
+        "maxHeightLand": 960,
+        "quality": 95,
+        "dpi": 72
+    },
+    "tmbPhoto": {
+        "maxWidthPort": 340,
+        "maxHeightLand": 226,
+        "quality": 80,
+        "dpi": 72
+    },
+    "config": {
+        "tmbSuffix": "tn",
+        "resFolder": "result"
+    }
+}
