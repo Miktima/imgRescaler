@@ -1,0 +1,6 @@
+Lib/
+Include/
+result/
+Scripts/
+tstImg/
+pyvenv.cfg
