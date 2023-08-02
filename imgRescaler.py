@@ -32,7 +32,7 @@ except FileNotFoundError:
     print("Error: the path <%s> is not valid" % imgPath)
     sys.exit()
 # Get file name to save resized images with the same name
-f = re.compile(r'[\w]+.jpg$')
+f = re.compile(r'[\w-]+.jpg$')
 file = f.findall(imgPath)
 # Create folder for resized images if it doesn't exist
 if os.path.exists(resFolder) == False:
@@ -44,7 +44,7 @@ if origImg.width >= origImg.height:
     # new size for hires photo
     (width, height) = (int(origImg.width // rel), int(origImg.height // rel))
     # resize photo to new size with LANCZOS filter (https://pillow.readthedocs.io/en/stable/handbook/concepts.html#concept-filters)
-    hires = origImg.resize((width, height), resample=Image.Resampling.LANCZOS)
+    hires = origImg.resize((width, height), resample=Image.LANCZOS)
     # save hires photo with new dpi and quality
     hires.save(resFolder + "/" + file[0], dpi=(hiresPhoto["dpi"], hiresPhoto["dpi"]), quality=hiresPhoto["quality"])
     # get reduce factor for thumbnail photo
@@ -52,7 +52,7 @@ if origImg.width >= origImg.height:
     # new size for thumbnail photo
     (widthTmb, heightTmb) = (int(origImg.width // relTmb), int(origImg.height // relTmb))
     # resize photo to new size with BICUBIC filter (https://pillow.readthedocs.io/en/stable/handbook/concepts.html#concept-filters)
-    tmb = origImg.resize((widthTmb, heightTmb), resample=Image.Resampling.BICUBIC)
+    tmb = origImg.resize((widthTmb, heightTmb), resample=Image.BICUBIC)
     # add suffix for thumbnail
     tmbName = re.sub('\.', '_' + tmbSuffix + '.', file[0])
     # save thumbnail photo with new dpi and quality
@@ -61,10 +61,10 @@ if origImg.width >= origImg.height:
 else:
     rel = origImg.height/hiresPhoto["maxHeightLand"]
     (width, height) = (int(origImg.width // rel), int(origImg.height // rel))
-    hires = origImg.resize((width, height), resample=Image.Resampling.LANCZOS)
+    hires = origImg.resize((width, height), resample=Image.LANCZOS)
     hires.save(resFolder + "/" + file[0], dpi=(hiresPhoto["dpi"], hiresPhoto["dpi"]), quality=hiresPhoto["quality"])
     relTmb = origImg.height/tmbPhoto["maxHeightLand"]
     (widthTmb, heightTmb) = (int(origImg.width // relTmb), int(origImg.height // relTmb))
-    tmb = origImg.resize((widthTmb, heightTmb), resample=Image.Resampling.BICUBIC)
+    tmb = origImg.resize((widthTmb, heightTmb), resample=Image.BICUBIC)
     tmbName = re.sub('\.', '_' + tmbSuffix + '.', file[0])
     tmb.save(resFolder + "/" + tmbName, dpi=(tmbPhoto["dpi"], tmbPhoto["dpi"]), quality=tmbPhoto["quality"])

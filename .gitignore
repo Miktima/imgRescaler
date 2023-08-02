@@ -3,4 +3,5 @@ Include/
 result/
 Scripts/
 tstImg/
+sources/
 pyvenv.cfg
